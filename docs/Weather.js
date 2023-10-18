@@ -33,20 +33,26 @@ function processResults(data){
     let htmlOutput = '';  // Create an empty HTML string
 
     for (let i = 0; i < dailyForecast.time.length; i++) {
-        const date = dailyForecast.time[i];
-        const weatherCode = dailyForecast.weathercode[i];
-        const maxTemperature = dailyForecast.temperature_2m_max[i];
-        const minTemperature = dailyForecast.temperature_2m_min[i];
+      const date = dailyForecast.time[i];
+      const weatherCode = dailyForecast.weathercode[i];
+      const maxTemperature = dailyForecast.temperature_2m_max[i];
+      const minTemperature = dailyForecast.temperature_2m_min[i];
 
-        // Append weather information to the HTML string
-        htmlOutput += `
-            Date: ${date}<br>
-            Weather Code: ${getWeatherDescription(weatherCode)}<br>
-            Max Temperature: ${maxTemperature}°C<br>
-            Min Temperature: ${minTemperature}°C<br>
-            -------------------------------------<br>`;
-    }
-    jsonElement.innerHTML= htmlOutput;
+      // Append weather information to the HTML string
+      htmlOutput += `
+  <div class="col-md d-flex flex-column justify-content-between">
+      <div class="card mb-4 dias">
+          <div class="card-body">
+              <p class="card-text">${getWeatherDescription(weatherCode)}</p>
+              <p class="card-text">Max Temperature: ${maxTemperature}°C</p>
+              <p class="card-text">Min Temperature: ${minTemperature}°C</p>
+              <h5 class="card-title">${date}</h5>
+          </div>
+      </div>
+  </div>`;
+  }
+
+  document.getElementById("weatherContent").innerHTML = htmlOutput;
 }
 function getWeatherDescription(weatherCode) {
     const weatherDescriptions = {

@@ -44,12 +44,18 @@ function updateMovingPointer() {
 }
 
 function forecast() {
-  let lat= document.getElementById("lat");
-  let lon=document.getElementById("lon");
-    const center = map.getCenter();
-    const lat_txt = center.lat().toFixed(2);
-    const lng_txt = center.lng().toFixed(2);
-  fetchWeatherForecast(lat_txt, lng_txt);
+  // Get latitude and longitude from input fields
+  let lat = parseFloat(document.getElementById("lat").value);
+  let lon = parseFloat(document.getElementById("lon").value);
+
+  // Check if lat and lon are valid numbers
+  if (isNaN(lat) || isNaN(lon)) {
+      alert("Please enter valid latitude and longitude.");
+      return;
+  }
+
+  // Call the fetchWeatherForecast function with the input lat and lon
+  fetchWeatherForecast(lat, lon);
 }
 
 initMap();
